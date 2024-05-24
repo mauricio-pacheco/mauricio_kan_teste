@@ -1,0 +1,6 @@
+Passos
+
+Criar Repositório Git e Clonar
+git clone https://github.com/mauricio-pacheco/mauricio_kan_teste.git
+
+Criar Projeto Laravel
