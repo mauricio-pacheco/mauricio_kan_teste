@@ -45,7 +45,7 @@ function Example() {
             if (response.ok) {
                 const data = await response.json();
                 setUploadMessage(`Arquivo enviado com sucesso. Caminho: ${data.path}`);
-                setUpdateFiles(true); // Atualiza a lista de arquivos
+                setUpdateFiles(true); // Atualizando a lista de arquivos
             } else {
                 setUploadMessage('Erro ao enviar arquivo.');
             }

@@ -5,7 +5,7 @@ function FileList({ updateFiles }) {
 
     useEffect(() => {
         fetchFiles();
-    }, [updateFiles]); // Run fetchFiles whenever updateFiles changes
+    }, [updateFiles]);
 
     const fetchFiles = async () => {
         try {
@@ -15,7 +15,7 @@ function FileList({ updateFiles }) {
             }
             const data = await response.json();
             setFiles(data.files.map(file => {
-                // Formate o nome do arquivo removendo o caminho completo
+                // Formatando o nome do arquivo removendo o caminho completo
                 return file.split('/').pop();
             }));
         } catch (error) {
