@@ -9,7 +9,6 @@ function Example() {
     const [csrfToken, setCsrfToken] = useState('');
     const [uploadProgress, setUploadProgress] = useState(0);
     const [files, setFiles] = useState([]);
-    const [updateFiles, setUpdateFiles] = useState(false); // Estado para controlar a atualização da lista
 
     useEffect(() => {
         async function fetchCsrfToken() {
@@ -45,7 +44,7 @@ function Example() {
             if (response.ok) {
                 const data = await response.json();
                 setUploadMessage(`Arquivo enviado com sucesso. Caminho: ${data.path}`);
-                setUpdateFiles(true); // Atualizando a lista de arquivos
+                setFiles(prevFiles => [...prevFiles, data.path.split('/').pop()]);
             } else {
                 setUploadMessage('Erro ao enviar arquivo.');
             }
@@ -71,7 +70,7 @@ function Example() {
                     </form>
                     {uploading && <PreLoader progress={uploadProgress} />}
                     {uploadMessage && <p>{uploadMessage}</p>}
-                    <FileList files={files} updateFiles={updateFiles} />
+                    <FileList files={files} />
                 </div>
             </div>
             <h6 className="text-center">Autor: Maurício Pacheco</h6>
