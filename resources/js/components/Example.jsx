@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PreLoader from './PreLoader';
-import FileList from './FileList'; // Importe o componente FileList
+import FileList from './FileList';
 
 function Example() {
     const [file, setFile] = useState(null);
     const [uploadMessage, setUploadMessage] = useState(null);
     const [uploading, setUploading] = useState(false);
     const [csrfToken, setCsrfToken] = useState('');
-    const [uploadProgress, setUploadProgress] = useState(0); // Estado para armazenar o progresso do upload
-    const [files, setFiles] = useState([]); // Estado para armazenar a lista de arquivos recebidos
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [files, setFiles] = useState([]);
 
     useEffect(() => {
         async function fetchCsrfToken() {
@@ -37,15 +37,13 @@ function Example() {
                 body: formData,
                 onUploadProgress: (progressEvent) => {
                     const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-                    setUploadProgress(percentCompleted); // Atualiza o progresso do upload
+                    setUploadProgress(percentCompleted);
                 }
             });
 
             if (response.ok) {
                 const data = await response.json();
                 setUploadMessage(`Arquivo enviado com sucesso. Caminho: ${data.path}`);
-                
-                // Atualiza a lista de arquivos após o upload bem-sucedido
                 fetchFiles();
             } else {
                 setUploadMessage('Erro ao enviar arquivo.');
@@ -58,28 +56,34 @@ function Example() {
         }
     };
 
-    // Função para buscar a lista de arquivos recebidos
     const fetchFiles = async () => {
         try {
             const response = await fetch('/api/files');
             const data = await response.json();
-            setFiles(data.files); // Atualiza a lista de arquivos
+            setFiles(data.files);
         } catch (error) {
             console.error('Erro ao obter a lista de arquivos:', error);
         }
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Carregar Arquivo</button>
-            </form>
-            {uploading && <PreLoader progress={uploadProgress} />} {/* Passa o progresso como prop para PreLoader */}
-            {uploadMessage && <p>{uploadMessage}</p>}
-            
-            {/* Exibe a lista de arquivos */}
-            <FileList files={files} />
+        <div className="container">
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    <br></br>
+                    <h2 className="text-center">Carregar Arquivos .CSV</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <input type="file" className="form-control" onChange={handleFileChange} />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Carregar Arquivo</button>
+                    </form>
+                    {uploading && <PreLoader progress={uploadProgress} />}
+                    {uploadMessage && <p>{uploadMessage}</p>}
+                    <FileList files={files} />
+                </div>
+            </div>
+            <h6 className="text-center">Autor: Maurício Pacheco</h6>
         </div>
     );
 }
