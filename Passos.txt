@@ -4,3 +4,12 @@ Criar Repositório Git e Clonar
 git clone https://github.com/mauricio-pacheco/mauricio_kan_teste.git
 
 Criar Projeto Laravel
+composer create-project --prefer-dist laravel/laravel mauricio_kan_teste
+
+Alterar arquivo .env Banco de Dados
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kanastra
+DB_USERNAME=root
+DB_PASSWORD=sua_senha
