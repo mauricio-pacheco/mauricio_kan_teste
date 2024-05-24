@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Jobs\ProcessCsvFile;
 
 class UploadCsvController extends Controller
@@ -22,7 +21,7 @@ class UploadCsvController extends Controller
             $path = $file->storeAs('csv', $file->getClientOriginalName());
 
             // Despache um trabalho para processar o arquivo CSV
-            ProcessCsvFile::dispatch($path);
+            ProcessCsvFile::dispatch($path)->onQueue('high'); // Coloque o trabalho em uma fila de alta prioridade
 
             // Retorna uma resposta indicando que o arquivo foi recebido para processamento
             return response()->json(['message' => 'Arquivo CSV enviado para processamento.'], 200);
@@ -31,3 +30,4 @@ class UploadCsvController extends Controller
         return response()->json(['error' => 'Nenhum arquivo enviado.'], 400);
     }
 }
+
