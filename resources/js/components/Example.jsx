@@ -33,26 +33,32 @@ function Example() {
         formData.append('file', file);
 
         try {
-            const response = await fetch('/api/upload', {
-                method: 'POST',
-                body: formData,
-                onUploadProgress: (progressEvent) => {
-                    const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/upload', true);
+
+            // Configurando o evento de progresso
+            xhr.upload.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const percentCompleted = Math.round((event.loaded * 100) / event.total);
                     setUploadProgress(percentCompleted);
                 }
-            });
+            };
 
-            if (response.ok) {
-                const data = await response.json();
-                setUploadMessage(`Arquivo enviado com sucesso. Caminho: ${data.path}`);
-                setUpdateFiles(true); // Atualizando a lista de arquivos
-            } else {
-                setUploadMessage('Erro ao enviar arquivo.');
-            }
+            xhr.onload = async () => {
+                if (xhr.status === 200) {
+                    const data = JSON.parse(xhr.responseText);
+                    setUploadMessage('Arquivo enviado com sucesso.');
+                    setUpdateFiles(true); // Atualizando a lista de arquivos
+                } else {
+                    setUploadMessage('Erro ao enviar arquivo.');
+                }
+                setUploading(false);
+            };
+
+            xhr.send(formData);
         } catch (error) {
             console.error('Erro ao enviar arquivo:', error);
             setUploadMessage('Erro ao enviar arquivo.');
-        } finally {
             setUploading(false);
         }
     };
@@ -61,7 +67,7 @@ function Example() {
         <div className="container">
             <div className="row">
                 <div className="col-md-6 offset-md-3">
-                    <br></br>
+                    <br />
                     <h2 className="text-center">Carregar Arquivos .CSV</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">

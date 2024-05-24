@@ -1,6 +1,6 @@
 import React from 'react';
 
-const PreLoader = () => {
+const PreLoader = ({ progress }) => {
     const textStyle = {
         textAlign: 'center',
         marginTop: '5px'
@@ -8,7 +8,7 @@ const PreLoader = () => {
 
     return (
         <div style={textStyle}>
-            Carregando...
+            Carregando... {progress}%
         </div>
     );
 };
