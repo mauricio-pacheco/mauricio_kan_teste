@@ -1,0 +1,88 @@
+Passos
+
+Criar Repositório Git e Clonar
+git clone https://github.com/mauricio-pacheco/mauricio_kan_teste.git
+
+Criar Projeto Laravel
+composer create-project --prefer-dist laravel/laravel mauricio_kan_teste
+
+Alterar arquivo .env Banco de Dados
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=kanastra
+DB_USERNAME=root
+DB_PASSWORD=sua_senha
+
+Instalar React
+composer require laravel/ui
+php artisan ui react
+npm install
+npm run dev
+
+Configurar Webpack
+npm install --save-dev vite laravel-vite-plugin
+
+Configurar o Vite criando o arquivo vite.config.js
+
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/js/app.jsx'],
+            refresh: true,
+        }),
+    ],
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
+});
+
+Alterar o arquivo resources/js/app.js para resources/js/app.jsx e configurar para usar o React:
+
+import React from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Example from './components/Example';
+
+const root = ReactDOM.createRoot(document.getElementById('app'));
+root.render(
+    <Router>
+        <Example />
+    </Router>
+);
+
+
+Criar um componente React Example em resources/js/components/Example.jsx:
+
+import React from 'react';
+
+function Example() {
+    return (
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="card">
+                        <div className="card-header">Example Component</div>
+
+                        <div className="card-body">I'm an example component!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Example;
+
+Configurar o Blade Template
+
+Instalar o Router Dom:
+
+npm install react-router-dom
+
