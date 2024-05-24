@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Example() {
-    return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
+    const [file, setFile] = useState(null);
 
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            // Handle response
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="file" onChange={handleFileChange} />
+            <button type="submit">Upload</button>
+        </form>
     );
 }
 

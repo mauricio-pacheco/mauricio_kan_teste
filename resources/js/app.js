@@ -14,16 +14,3 @@ import './bootstrap';
 
 import './components/Example';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import FileUpload from './components/FileUpload';
-
-function App() {
-    return (
-        <div className="container">
-            <FileUpload />
-        </div>
-    );
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
