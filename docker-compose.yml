@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  # Serviço para o aplicativo Laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      # Copie as variáveis de ambiente do seu arquivo .env aqui
+      APP_NAME: Laravel
+      APP_ENV: local
+      APP_KEY: base64:Xq4hS8RavEJZ8GtCvR3MAMKBJqOM5ZGf1aZJ/fsXbws=
+      APP_DEBUG: "true"
+      APP_TIMEZONE: UTC
+      APP_URL: http://localhost
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: kanastra
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+      SESSION_DRIVER: database
+      SESSION_LIFETIME: 120
+      CACHE_STORE: database
+      MAIL_MAILER: log
+      MAIL_FROM_ADDRESS: "hello@example.com"
+      MAIL_FROM_NAME: "Laravel"
+
+  # Serviço para o banco de dados MySQL
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_DATABASE: kanastra
+
+volumes:
+  mysql_data:

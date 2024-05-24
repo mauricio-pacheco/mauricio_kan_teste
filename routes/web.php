@@ -19,6 +19,6 @@ Route::get('/', function () {
 Route::post('/api/upload', [UploadCsvController::class, 'upload']);
 
 Route::get('/api/files', function () {
-    $files = Storage::files('csv'); // Obtém a lista de arquivos no diretório storage/app/csv
+    $files = Storage::files('csv');
     return response()->json(['files' => $files]);
 });

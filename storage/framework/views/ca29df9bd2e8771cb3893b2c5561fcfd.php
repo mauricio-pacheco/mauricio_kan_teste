@@ -6,10 +6,8 @@
 
     <title>Upload do CSV</title>
 
-    <!-- Links para os arquivos CSS do Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
-    <!-- Adicione o link para o seu script JS compilado -->
     <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.jsx']); ?>
 </head>
 <body>
