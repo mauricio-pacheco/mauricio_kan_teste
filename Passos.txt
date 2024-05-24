@@ -86,3 +86,7 @@ Instalar o Router Dom:
 
 npm install react-router-dom
 
+Para envio de boletos utilizar o comando:
+
+php artisan csv:process caminho/do/seu/arquivo.csv
+
