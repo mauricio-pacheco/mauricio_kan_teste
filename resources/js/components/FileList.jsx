@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 
-function FileList() {
+function FileList({ updateFiles }) {
     const [files, setFiles] = useState([]);
 
     useEffect(() => {
-        async function fetchFiles() {
-            try {
-                const response = await fetch('/api/files');
-                if (!response.ok) {
-                    throw new Error('Erro ao obter a lista de arquivos.');
-                }
-                const data = await response.json();
-                setFiles(data.files.map(file => {
-                    // Formate o nome do arquivo removendo o caminho completo
-                    return file.split('/').pop();
-                }));
-            } catch (error) {
-                console.error('Erro ao obter a lista de arquivos:', error);
-            }
-        }
-
         fetchFiles();
-    }, []);
+    }, [updateFiles]); // Run fetchFiles whenever updateFiles changes
+
+    const fetchFiles = async () => {
+        try {
+            const response = await fetch('/api/files');
+            if (!response.ok) {
+                throw new Error('Erro ao obter a lista de arquivos.');
+            }
+            const data = await response.json();
+            setFiles(data.files.map(file => {
+                // Formate o nome do arquivo removendo o caminho completo
+                return file.split('/').pop();
+            }));
+        } catch (error) {
+            console.error('Erro ao obter a lista de arquivos:', error);
+        }
+    };
 
     return (
         <div>
