@@ -24,7 +24,7 @@ Processamento do Arquivo
 - Geração de Boletos: Baseado nos dados recebidos, o sistema gera boletos de cobrança regularmente.
 - Disparo de E-mails: E-mails são enviados automaticamente para os destinatários com as informações da cobrança.
  
-Contêinerização Docker:
+* Contêinerização Docker:
 - Dockerfile: Configuração do ambiente de desenvolvimento e produção para o projeto.
 - docker-compose.yml: Configuração do `docker-compose` para rodar o projeto em contêineres, incluindo a aplicação e o banco de dados.
 
@@ -35,4 +35,10 @@ O sistema de cobranças desenvolvido atende aos requisitos estabelecidos pela Ka
 Próximos Passos:
 - Testes e Validação: Realizar testes exaustivos para garantir a confiabilidade do sistema em diferentes cenários.
 - Documentação Adicional: Documentar detalhadamente os endpoints da API e as configurações do Docker para facilitar futuras manutenções e atualizações.
+
+* Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' no diretório clonado.
+* Após a instalação do composer, subir as serviços:
+* Backend: php artisan serve
+* Frontend: npm run dev
+  
 
