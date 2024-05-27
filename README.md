@@ -8,8 +8,11 @@
 </p>
 
 Documentação de Apresentação de Conclusão Projeto
+
 Implementação
+
 Frontend
+
 Formulário de Upload
 
 - Componente Formulário: Implementado com React para permitir o upload de arquivos `.csv`.
