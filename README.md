@@ -46,8 +46,16 @@ Processamento do Arquivo
 - Disparo de E-mails: E-mails são enviados automaticamente para os destinatários com as informações da cobrança.
 
 `.\mauricio_kan_teste\app\Services\CsvProcessorService.php`
+
+Testes:
+- Testes e Validação: Realizar testes para garantir a confiabilidade do sistema em diferentes cenários.
+
+`.\mauricio_kan_teste\app\Jobs\ProcessCsvFileTest.php`
+
+- Utilizar comando php artisan serve
   
-* Contêinerização Docker:
+Contêinerização Docker:
+
 - Dockerfile: Configuração do ambiente de desenvolvimento e produção para o projeto.
 - docker-compose.yml: Configuração do `docker-compose` para rodar o projeto em contêineres, incluindo a aplicação e o banco de dados.
 - Executar `docker-compose up --build` dentro do diretório clonado.
@@ -57,7 +65,6 @@ Conclusão:
 O sistema de cobranças desenvolvido atende aos requisitos estabelecidos pela Kanastra, fornecendo uma interface de upload de arquivos `.csv`, processamento eficiente e escalável dos dados, e geração automática de boletos e e-mails. A utilização de contêineres Docker facilita a implantação e manutenção do sistema, garantindo flexibilidade e robustez.
 
 Próximos Passos:
-- Testes e Validação: Realizar testes exaustivos para garantir a confiabilidade do sistema em diferentes cenários.
 - Documentação Adicional: Documentar detalhadamente os endpoints da API e as configurações do Docker para facilitar futuras manutenções e atualizações.
 
 OBS: Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' no diretório clonado.
