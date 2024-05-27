@@ -20,5 +20,15 @@ Route::post('/api/upload', [UploadCsvController::class, 'upload']);
 
 Route::get('/api/files', function () {
     $files = Storage::files('csv');
-    return response()->json(['files' => $files]);
+    $fileDetails = [];
+
+    foreach ($files as $file) {
+        $fileDetails[] = [
+            'name' => basename($file),
+            'type' => Storage::mimeType($file),
+            'size' => Storage::size($file),
+        ];
+    }
+
+    return response()->json(['files' => $fileDetails]);
 });
