@@ -11,19 +11,20 @@ Documentação de Apresentação de Conclusão Projeto
 Implementação
 Frontend
 Formulário de Upload
+
 - Componente Formulário: Implementado com React para permitir o upload de arquivos `.csv`.
 
-.\mauricio_kan_teste\resources\js\components\Example.jsx
-.\mauricio_kan_teste\resources\js\components\FileList.jsx
-.\mauricio_kan_teste\resources\js\components\PreLoader.jsx
+`.\mauricio_kan_teste\resources\js\components\Example.jsx`
+`.\mauricio_kan_teste\resources\js\components\FileList.jsx`
+`.\mauricio_kan_teste\resources\js\components\PreLoader.jsx`
 
 - Gerenciamento de Estado: Utilização do Context API e Reducer para gerenciamento de estados e ações.
 
-.\mauricio_kan_teste\resources\js\components\Example.jsx
+`.\mauricio_kan_teste\resources\js\components\Example.jsx`
 
 - Atualização da Listagem: A listagem de arquivos é atualizada automaticamente após o upload bem-sucedido.
 
-.\mauricio_kan_teste\resources\js\components\FileList.jsx
+`.\mauricio_kan_teste\resources\js\components\FileList.jsx`
  
 Listagem de Arquivos
 - Interface Usuário: Melhorias nos componentes fornecidos para garantir uma experiência de usuário fluida e responsiva.
@@ -32,12 +33,11 @@ Backend
 Processamento do Arquivo
 - Endpoint de Upload: Endpoint criado para receber e processar o arquivo `.csv`.
 
-Route::post('/api/upload', [UploadCsvController::class, 'upload']);
+`Route::post('/api/upload', [UploadCsvController::class, 'upload']);`
   
 - Processamento Escalável: Lógica de processamento otimizada para garantir que muitos registros sejam processados em menos de 60 segundos.
 
- // Despachar o job para a fila 'high'
- ProcessCsvFile::dispatch($path)->onQueue('high');
+`ProcessCsvFile::dispatch($path)->onQueue('high');`
 
 - Geração de Boletos: Baseado nos dados recebidos, o sistema gera boletos de cobrança regularmente.
 
