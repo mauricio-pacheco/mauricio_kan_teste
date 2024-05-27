@@ -73,14 +73,20 @@ function Example() {
                         <div className="mb-3">
                             <input type="file" className="form-control" onChange={handleFileChange} />
                         </div>
-                        <button type="submit" className="btn btn-primary">Carregar Arquivo</button>
+                        <div className="text-center"> {/* Esta div é adicionada */}
+                            <button type="submit" className="btn btn-primary btn-block">Carregar Arquivo</button>
+                        </div>
                     </form>
                     {uploading && <PreLoader progress={uploadProgress} />}
                     {uploadMessage && <p>{uploadMessage}</p>}
                     <FileList files={files} updateFiles={updateFiles} />
                 </div>
             </div>
-            <h6 className="text-center">Autor: Maurício Pacheco</h6>
+            <div className="row">
+                <div className="col-md-12 text-center">
+                    <h6>Autor: Maurício Pacheco</h6>
+                </div>
+            </div>
         </div>
     );
 }
