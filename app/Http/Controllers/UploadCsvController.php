@@ -18,6 +18,7 @@ class UploadCsvController extends Controller
 
             $path = $file->storeAs('csv', $file->getClientOriginalName());
 
+            // Despachar o job para a fila 'high'
             ProcessCsvFile::dispatch($path)->onQueue('high');
 
             return response()->json(['message' => 'Arquivo CSV enviado para processamento.'], 200);
@@ -26,4 +27,3 @@ class UploadCsvController extends Controller
         return response()->json(['error' => 'Nenhum arquivo enviado.'], 400);
     }
 }
-
