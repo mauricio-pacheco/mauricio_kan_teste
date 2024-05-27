@@ -41,12 +41,12 @@ Processamento do Arquivo
 
 - Geração de Boletos: Baseado nos dados recebidos, o sistema gera boletos de cobrança regularmente.
 
-.\mauricio_kan_teste\app\Jobs\ProcessCsvFile.php
+`.\mauricio_kan_teste\app\Jobs\ProcessCsvFile.php`
  
 - Disparo de E-mails: E-mails são enviados automaticamente para os destinatários com as informações da cobrança.
 
- .\mauricio_kan_teste\app\Services\CsvProcessorService.php 
- 
+`.\mauricio_kan_teste\app\Services\CsvProcessorService.php`
+  
 * Contêinerização Docker:
 - Dockerfile: Configuração do ambiente de desenvolvimento e produção para o projeto.
 - docker-compose.yml: Configuração do `docker-compose` para rodar o projeto em contêineres, incluindo a aplicação e o banco de dados.
