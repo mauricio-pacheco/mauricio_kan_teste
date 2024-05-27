@@ -77,10 +77,10 @@ function Example() {
                             <button type="submit" className="btn btn-primary btn-block">Carregar Arquivo</button>
                         </div>
                     </form>
-                    <br></br>
                     {uploading && <PreLoader progress={uploadProgress} />}
                     {uploadMessage && <p>{uploadMessage}</p>}
                     <FileList files={files} updateFiles={updateFiles} />
+                    <br></br>
                 </div>
             </div>
             <div className="row">
