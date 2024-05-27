@@ -55,7 +55,7 @@ Processamento do Arquivo
 Testes:
 - Testes e Validação: Realizar testes para garantir a confiabilidade do sistema em diferentes cenários.
 
-`.\mauricio_kan_teste\app\Jobs\ProcessCsvFileTest.php`
+`.\mauricio_kan_teste\tests\Jobs\ProcessCsvFileTest.php`
 
 - Utilizar comando php artisan serve
   
