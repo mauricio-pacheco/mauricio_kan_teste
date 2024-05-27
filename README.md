@@ -76,6 +76,4 @@ O sistema de cobranças desenvolvido atende aos requisitos estabelecidos pela Ka
 
 Próximos Passos:
 - Documentação Adicional: Documentar detalhadamente os endpoints da API e as configurações do Docker para facilitar futuras manutenções e atualizações.
-- 
-  
 
