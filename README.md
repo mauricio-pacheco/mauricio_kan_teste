@@ -27,7 +27,7 @@ Processamento do Arquivo
 * Contêinerização Docker:
 - Dockerfile: Configuração do ambiente de desenvolvimento e produção para o projeto.
 - docker-compose.yml: Configuração do `docker-compose` para rodar o projeto em contêineres, incluindo a aplicação e o banco de dados.
-- Executar 'docker-compose up --build' dentro do diretório clonado.
+- Executar `docker-compose up --build` dentro do diretório clonado.
 
 Conclusão:
 
