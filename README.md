@@ -58,6 +58,8 @@ Testes:
 `.\mauricio_kan_teste\tests\Jobs\ProcessCsvFileTest.php`
 
 - Utilize o comando php artisan test para testes
+
+OBS: Configurar o dados do e-mail no arquivo.env para o envio.
   
 Contêinerização Docker:
 
