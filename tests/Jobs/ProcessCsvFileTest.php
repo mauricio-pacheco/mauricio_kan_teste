@@ -42,7 +42,7 @@ class ProcessCsvFileTest extends TestCase
        
         // Verifica se o e-mail foi enviado
         Mail::assertSent(BoletoGenerated::class, function ($mail) {
-            return $mail->hasTo('johndoe@example.com');
+            return $mail->hasTo('mauricio@casadaweb.net');
         });
     }
 }
