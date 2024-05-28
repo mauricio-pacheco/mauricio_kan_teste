@@ -70,7 +70,6 @@ Contêinerização Docker:
 OBS: Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' no diretório clonado.
 * Após a instalação do composer, subir os serviços:
 * Backend: php artisan serve
-* Backend: php artisan migrate
 * Frontend: npm run dev
 
 Conclusão:
