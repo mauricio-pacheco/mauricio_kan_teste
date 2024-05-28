@@ -7,6 +7,25 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+Requisitos:
+Docker instalado na máquina local.
+
+Clonar Repositório
+git clone https://github.com/mauricio-pacheco/mauricio_kan_teste.git
+
+cd mauricio_kan_teste
+
+Construir e Iniciar o Contêiner via Docker Compose:
+
+docker-compose up --build
+
+OBS: Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' no diretório clonado.
+* Após a instalação do composer, subir os serviços:
+* Backend: php artisan serve
+* Frontend: npm run dev
+
+#
+
 Documentação de Apresentação de Conclusão Projeto
 
 Implementação
@@ -66,11 +85,6 @@ Contêinerização Docker:
 - Dockerfile: Configuração do ambiente de desenvolvimento e produção para o projeto.
 - docker-compose.yml: Configuração do `docker-compose` para rodar o projeto em contêineres, incluindo a aplicação e o banco de dados.
 - Executar `docker-compose up --build` dentro do diretório clonado.
-
-OBS: Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' no diretório clonado.
-* Após a instalação do composer, subir os serviços:
-* Backend: php artisan serve
-* Frontend: npm run dev
 
 Conclusão:
 
