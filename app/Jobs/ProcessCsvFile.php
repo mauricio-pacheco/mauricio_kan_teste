@@ -7,11 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
-use App\Models\Boleto; // Supondo que você tenha um modelo Boleto para armazenar informações sobre os boletos gerados
+use App\Models\Boleto;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\BoletoGenerated; // Supondo que você tenha um Mailable para enviar boletos por e-mail
+use App\Mail\BoletoGenerated;
 
 class ProcessCsvFile implements ShouldQueue
 {
@@ -35,6 +34,11 @@ class ProcessCsvFile implements ShouldQueue
         $records = $reader->getRecords(); // Obter todos os registros do CSV
 
         foreach ($records as $index => $record) {
+            // Verificar se todas as chaves esperadas existem no registro
+            if (!isset($record['name'], $record['governmentId'], $record['email'], $record['debtAmount'], $record['debtDueDate'], $record['debtID'])) {
+                continue; // Pular registro se alguma chave estiver faltando
+            }
+
             // Processar cada registro
             $name = $record['name'];
             $governmentId = $record['governmentId'];
@@ -68,6 +72,11 @@ class ProcessCsvFile implements ShouldQueue
         if (!empty($records)) {
             // Processar o chunk final
             foreach ($records as $record) {
+                // Verificar se todas as chaves esperadas existem no registro
+                if (!isset($record['name'], $record['governmentId'], $record['email'], $record['debtAmount'], $record['debtDueDate'], $record['debtID'])) {
+                    continue; // Pular registro se alguma chave estiver faltando
+                }
+
                 // Processar cada registro do último chunk
                 $name = $record['name'];
                 $governmentId = $record['governmentId'];
@@ -93,6 +102,10 @@ class ProcessCsvFile implements ShouldQueue
 
         // Após processar todos os registros, pode ser executado qualquer lógica adicional necessária
         // Por exemplo, enviar um e-mail de relatório ou atualizar o status do processamento do arquivo CSV
-    
+    }
+
+    public function getFilePath()
+    {
+        return $this->filePath;
     }
 }
