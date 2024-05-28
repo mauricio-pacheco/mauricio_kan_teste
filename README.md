@@ -57,7 +57,7 @@ Testes:
 
 `.\mauricio_kan_teste\tests\Jobs\ProcessCsvFileTest.php`
 
-- Utilizar comando php artisan serve
+- Utilize o comando php artisan test para testes
   
 Contêinerização Docker:
 
