@@ -18,8 +18,13 @@ class UploadCsvController extends Controller
 
             $path = $file->storeAs('csv', $file->getClientOriginalName());
 
+            // Configura a conexão da fila para utilizar a fila sync
+            config(['queue.default' => 'sync']);
+
+            $filePath = 'csv/input.csv';
+
             // Despachar o job para a fila 'high'
-            ProcessCsvFile::dispatch($path)->onQueue('high');
+            ProcessCsvFile::dispatch($filePath)->onQueue('high')->delay(now()->addSeconds(3000));
 
             return response()->json(['message' => 'Arquivo CSV enviado para processamento.'], 200);
         }
