@@ -18,10 +18,14 @@ class ProcessCsvFile implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $filePath;
+    protected $offset;
+    protected $chunkSize;
 
-    public function __construct($filePath)
+    public function __construct($filePath, $offset = 0, $chunkSize = 1000)
     {
         $this->filePath = $filePath;
+        $this->offset = $offset;
+        $this->chunkSize = $chunkSize;
     }
 
     public function handle()
@@ -39,12 +43,21 @@ class ProcessCsvFile implements ShouldQueue
             $reader->setHeaderOffset(0);
 
             // Processar o arquivo em chunks
-            $chunkSize = 1000; // Tamanho do chunk
             $records = $reader->getRecords(); // Obter todos os registros do CSV
 
             DB::beginTransaction(); // Iniciar transação
 
+            $processedRecords = 0;
+
             foreach ($records as $index => $record) {
+                // Processar apenas registros dentro do intervalo de offset e chunkSize
+                if ($index < $this->offset) {
+                    continue;
+                }
+                if ($index >= $this->offset + $this->chunkSize) {
+                    break;
+                }
+
                 logger('Processando registro de índice: ' . $index);
 
                 if (!isset($record['name'], $record['governmentId'], $record['email'], $record['debtAmount'], $record['debtDueDate'], $record['debtId'])) {
@@ -70,20 +83,21 @@ class ProcessCsvFile implements ShouldQueue
                 $boleto->due_date = $debtDueDate;
                 $boleto->debt_id = $debtID;
                 $boleto->save();
+
+                $processedRecords++;
             }
 
             DB::commit(); // Commit da transação
 
-            // Após processar todos os registros, pode ser executado qualquer lógica adicional necessária
-            logger('Job Completo!');
+            // Processando ochunk completo, despachar o próximo job
+            if ($processedRecords === $this->chunkSize) {
+                ProcessCsvFile::dispatch($this->filePath, $this->offset + $this->chunkSize, $this->chunkSize);
+            }
+
+            logger('Chunk processado com sucesso!');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback da transação em caso de erro
             logger('Erro no job: ' . $e->getMessage());
         }
-    }
-
-    public function getFilePath()
-    {
-        return $this->filePath;
     }
 }

@@ -20,14 +20,6 @@ class CreateBoletosTable extends Migration
             $table->timestamps();
         });
 
-        Boleto::create([
-            'name' => 'John Doe',
-            'government_id' => '123456789',
-            'email' => 'johndoe@example.com',
-            'debt_amount' => 1000.00,
-            'due_date' => '2023-12-31',
-            'debt_id' => 1,
-        ]);
     }
 
     public function down()
