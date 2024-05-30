@@ -94,6 +94,9 @@ class ProcessCsvFile implements ShouldQueue
                 ProcessCsvFile::dispatch($this->filePath, $this->offset + $this->chunkSize, $this->chunkSize);
             }
 
+            // Enviar e-mail após processar o chunk
+            //Mail::to('mauricio@casadaweb.net')->send(new BoletoGenerated($processedRecords, $this->offset, $this->chunkSize));
+
             logger('Chunk processado com sucesso!');
         } catch (\Exception $e) {
             DB::rollBack(); // Rollback da transação em caso de erro
