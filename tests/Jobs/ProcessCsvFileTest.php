@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Mail; 
 
 class ProcessCsvFileTest extends TestCase
 {
@@ -48,6 +49,10 @@ class ProcessCsvFileTest extends TestCase
                     'created_at' => $now,
                     'updated_at' => $now,
                 ]);
+
+            // Enviar e-mail após processar o registro
+            //Mail::to('mauricio@casadaweb.net')->send(new BoletoGenerated($record));
+
             } catch (\Exception $e) {
                 logger('Erro ao inserir no banco de dados: ' . $e->getMessage());
             }
