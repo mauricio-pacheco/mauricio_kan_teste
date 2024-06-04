@@ -23,7 +23,7 @@ Acessar a Aplicação:
 
 Depois que o contêiner estiver em execução, a aplicação estará acessível em http://localhost:8000.
 
-OBS: Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' no diretório clonado.
+OBS: Caso a Docker obter erros no ambiente local, clonar o projeto em um Servidor Web, com PHP 8.2 e executar 'composer install' e 'npm-install' no diretório clonado.
 * Após a instalação do composer, subir os serviços:
 * Backend: php artisan migrate (Subir as Tabelas no Banco de Dados)
 * Backend: php artisan serve
