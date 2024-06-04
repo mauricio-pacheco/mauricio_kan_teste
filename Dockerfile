@@ -16,20 +16,33 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip \
     git \
-    curl
+    curl \
+    gnupg
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install Node.js (version 18)
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql gd exif pcntl bcmath
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Expose port 9000 and start php-fpm server
-EXPOSE 9000
-CMD ["php-fpm"]
+# Install Composer dependencies
+RUN composer install
+
+# Install npm dependencies
+RUN npm install
+
+# Change permissions for the public directory
+RUN chown -R www-data:www-data /var/www/html/public
+
+# Expose port 8000 for Laravel
+EXPOSE 8000
+
+# Set the default command to run Laravel and Vite
+CMD php artisan serve --host=0.0.0.0 --port=8000 & npx vite
